@@ -1,0 +1,218 @@
+from os import name
+
+def intro(): # start to the game
+    while True: # describing the current situation the user finds themself in
+        print("Oh dear..! A fellow traveler such as yourself has found themself in a room with four doors.")
+        print("...") # spacer; to help output readability
+        print("Before we begin our adventure, What is your name?")
+        break
+
+# calling defined functions to run them
+print(intro(), " ")
+
+def name_check():
+    while True:
+        #collecting name to refer to player as
+        player_name = input("Enter Traveler Name: ")
+        name = []
+        are_u_sure = input("Your name is " + player_name.title() + " correct? [y/n] ")
+            # allowing the player to confirm their chosen name
+        if are_u_sure == 'y':
+            #greeting
+            print(print("Greetings",player_name.title() +" Let's begin our adventure together!"))
+            name.append(player_name)
+            break
+        elif are_u_sure == 'n':
+            continue # repeates the loop from the begining
+        else:
+            print("Please enter valid input.")
+            continue # repeating loop, allowing the user to try again
+
+print(name_check()," ")
+# had to use print rather than return, both would not run with return, please do escuse the "none"'s in output
+# did make an attempt to allow the two lines print empty spaces to remove 'none'
+
+while True:
+    # "loading" not sure, it looks nice and is aneat spacer to help me
+    print("...Loading..Save....")
+    print("Though you are allowed one try upon escaping..")
+    # another spacer for my eyes
+    ready = input("Are you ready traveler? [y/n] ")
+    if ready == 'y':
+        print("Let the journey begin","!")
+        break # ending the loop
+    elif ready == 'n':
+        print("Aw.. Surely you got this. Onward!")
+        break # ending the loop
+
+print("Loading...") # spacer
+
+# list to store items user collects as they proceed
+inventory = []
+chosen_class = []
+
+#class items, used to add into the inventory for when they make their choice
+paladin = ['Long Sword','Shield']
+merchant = ['Short Sword', 'Pouch of Fortune']
+defender = ['Durable Shield', 'Sword']
+# some kind of placer to remind the code what to do depending on the person's class
+p = ['paladin']
+m = ['merchant']
+d = ['defender']
+
+# player health (without any deductions nor additions)
+player_HP = 50
+# list of different class tiers the user may choose from
+cl_types = ["paladin","merchant","defender"]
+# user begins to make their first choice upon officially begining
+while True:
+    print("You, the traveler has gotten lost in a dungeon. Do not fret! You are an almighty warrior!")
+    # choices for classes the user can choose from
+    cl_types = ["paladin","merchant","defender"]
+    print(cl_types)
+    answer = input("..Say, what kind of warrior are you? ")
+    # determines if information on each class would be shown
+    if answer == cl_types[0]:
+        class1 = input("You have selected Paladin. Do you wish to learn more? [y/n] ")
+        if class1 == 'y':
+            #giving general information about the paladin class
+            print("In the Paladin class you will be provided with",paladin,"along with a +8 HP bonus")
+            # confirming choice
+            confirm_p = input("Do you wish to confirm selection?[y/n] ")
+            if confirm_p == 'y':
+                inventory.append(paladin) # adding items to inventory list that was made earlier
+                chosen_class.append(p) # adding information about the player and their chosen class
+                print("Inventory has been updated!",inventory)
+                print("Traveler's HP has been boosted to",int(player_HP) + 8,"!") # adding to players health
+                print("Welcome fellow Paladin! Let's get this jounery started!")
+                break # end and user has chosen
+            elif confirm_p == 'n':
+                continue # returns to previous if statement
+        elif class1 == 'n':
+            continue # retruns to previous if statement for user to reselect class
+    elif answer == cl_types[1]:
+        class2 = input("You have selected Merchant. Do you wish to learn more? [y/n] ")
+        if class2 == 'y':
+            print("In the Merchant class you will be provided with",merchant)
+            confirm_m = input("Do you wish to confirm selection? [y/n] ")
+            if confirm_m == 'y':
+                inventory.append(merchant) # adding to inventory list
+                chosen_class.append(m)
+                print("Inventory has been updated!",inventory)
+                print("Welcome to this trade circle! Let's get this jounery started!")
+                break # user has made their choice
+            elif confirm_m == 'n':
+                continue # returns to begining of loop
+        elif class2 == 'n':
+            continue
+    elif answer == cl_types[2]:
+        class3 = input("You have selected Defender. Do you wish to learn more? [y/n] ")
+        if class3 == 'y':
+            print("In the Defender class you will be provided with",defender,"and a +10 HP bonus")
+            confirm_d = input("Do you wish to confirm selection? [y/n] ")
+            # making sure the user wants to choose the class
+            if confirm_d == 'y':
+                inventory.append(defender) # adding list to lists to users inventory
+                chosen_class.append(d) # lettings code know what was chosen and stores the choice
+                print("Inventory has been updated!",inventory)
+                # adding to players default hp
+                print("Traveler's HP has been boosted to",int(player_HP) + 10,"!")
+                # different welcome messages are based on what class user has chosen
+                print("Welcome hefty Defender! Let's get this jounery started!")
+                break
+            elif confirm_d == 'n':
+                continue
+        if class3 == 'n':
+            continue
+    else:
+        print("Oh..I'm sorry thats not a choice or not entered correctly",'\n',"Please enter another entry.")
+        continue
+
+# spacer, trying to make it more open as i can for my self to not read the wrong lines
+print(" ", '\n', 'Loading...','\n'," ")
+
+
+# directs for the user and code to refer to
+directions = ['forward','backwards','right','left']
+#items that can be found for the player
+chest = ['Glass Bottle','Gem','Dried Lizard']
+
+def first_room():
+    while True: # begining 'loop', not benig used to loop
+        print("Once again, Traveler, good luck and lets begin!")
+        print("Loading...") # spacer
+        print(directions)
+        room_one = input("Which way would you like to head? ")
+        # begining of loop for user's decision for their first room that they enter
+        if room_one == 'forward':                          # moves rest of the text to a next line
+            print("Loading..") #spacer
+            print("You walk forward entering another room.",'\n',"Upon entering the room you stumble upon a chest")
+            firstchest = input("Do you with to open the chest? [y/n] ")
+            if firstchest == 'y':
+              print("The chest contains a gem")
+              inventory.append(chest[1]) # added to list
+              print("Item was added to inventory!")
+              print(inventory)
+            elif firstchest == 'n':
+              print("Alrighty, moving on then!")
+              break
+            else:
+              print("Please make a valid entry.")
+              continue
+        elif room_one == 'backwards':
+          print("Loading..") # spacer
+          # this choice leads to nowhere, allowing this portion of the function
+          print("Silly",', this is a wall! Lets try to move somewhere else')
+          continue
+        elif room_one == 'right':
+          print("Loading..") # spacer
+          print("You walk into an empty room..? That's pretty neat!")
+          print("Let's move onto the next room",".")
+          break
+        elif  room_one == 'left':
+          print("Loading..")
+          print("..Silly",", there isn't a door that way! Let'd try again")
+          continue  # allowing the loop to repeat after the two lines are printed for the user to try again
+        break
+
+print(first_room()) # spacer
+
+def congrats(): # the player makes it out! woohooo
+  while True:     # giving a message to the player
+    print("Congrats for making it out","! you truely are made for this adventure!")
+    break
+
+def defeat(): # a player note to inform them of defeat and graditude
+  while True:
+    print("It seems you weren't able to make it out.")
+
+
+
+def second_room(): # very similar to how first_room() is ran and writen, different outcomes (obviously) from what the user chooses
+
+  while True:
+    choice_two = input("Let's continue, where to now?",directions)
+    # once again displaying direction options for the player to choose from
+    if choice_two == 'forward':
+      print('You discover a barrel that contains',chest[0], 'and',chest[2])
+      print("...")
+      inventory.append(chest[0])
+      inventory.append(chest[2])
+      print("Items have been added to inventory!")
+      print("...")
+      print(defeat())
+      break
+    elif choice_two == 'backwards':
+      print("You walk back into the previous room. I don't believe heading backwards is a good idea..")
+      print("Let's head back and try again",)
+      continue
+    elif choice_two == 'right':
+      print('Opening the door to the next room you are greeted with a bright light which is accompanied by cheers..')
+      print(congrats())
+      break
+    elif choice_two == 'left':
+      print('Oho.. Im afriad you have entired an empty room','Thats quite the shame..')
+      print(defeat())
+      break
+
+print(second_room())
